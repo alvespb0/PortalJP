@@ -1,6 +1,6 @@
 <?php
 $dbhost     = "localhost";
-$banco      = "Indicadores";
+$banco      = "jp";
 $user       = "root";
 $password   = "";
 ?>

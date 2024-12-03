@@ -45,12 +45,12 @@ class Empresa{
     public $particularidades;
     
     public function __construct($ID_Empresa = null, $CNPJ_Empresa, $endereco_Empresa, $links_Empresa, $nome_Empresa, $particularidades){
-        $this->id = $id;
+        $this->ID_Empresa = $ID_Empresa;
         $this->CNPJ_Empresa = $CNPJ_Empresa;
         $this->endereco_Empresa = $endereco_Empresa;
         $this->links_Empresa = $links_Empresa;
         $this->nome_Empresa = $nome_Empresa;
-        $this->particularidades = $particularidades
+        $this->particularidades = $particularidades;
 
     }
 
