@@ -44,7 +44,8 @@ class Empresa{
      */
     public $particularidades;
     
-    public function __construct($ID_Empresa = null, $CNPJ_Empresa, $endereco_Empresa, $links_Empresa, $nome_Empresa, $particularidades){
+    public function __construct($ID_Empresa = null, $CNPJ_Empresa = null, $endereco_Empresa = null, $links_Empresa = null,
+                                 $nome_Empresa = null, $particularidades = null){
         $this->ID_Empresa = $ID_Empresa;
         $this->CNPJ_Empresa = $CNPJ_Empresa;
         $this->endereco_Empresa = $endereco_Empresa;

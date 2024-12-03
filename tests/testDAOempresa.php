@@ -7,7 +7,7 @@ $testDAO = new DAOempresa();
 #$testDAO->incluirEmpresa("Teste", "123456", "das bananas", ".br", "empresa de familia"); /* Inclusão funcionando */
 
 /**teste de edição da empresa */
-#$testDAO->atualizarEmpresa("tteste2","1234567","da maçã", ".net", "empresa vendida", 2); /* Edit funcionando, porém não sei como conseguir o ID*/
+#$testDAO->atualizarEmpresa("tteste2","1234567","da maçã", ".net", "empresa vendida"); /* Edit funcionando, porém não sei como conseguir o ID*/
 
 /**teste de busca a empresa */
 #$empresa = $testDAO->buscarEmpresa("1234567"); /* Busca funcionando, modelo de como manipular a array de objetos abaixo */
