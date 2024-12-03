@@ -10,7 +10,7 @@ class empresaImportacao{
      * representa a primary key da tabela
      * @var int 
      */
-    public $ID_EmpresaImportacao
+    public $ID_EmpresaImportacao;
 
     /**
      * representa a ID foreign key empresa da tabela
@@ -24,7 +24,7 @@ class empresaImportacao{
      */
     public $ID_Importacao;
 
-    public __construct($ID_EmpresaImportacao = null, $ID_Empresa, $ID_Importacao){
+    public function __construct($ID_EmpresaImportacao = null, $ID_Empresa = null, $ID_Importacao = null){
         $this->ID_EmpresaImportacao = $ID_EmpresaImportacao;
         $this->ID_Empresa = $ID_Empresa;
         $this->ID_Importacao = $ID_Importacao;

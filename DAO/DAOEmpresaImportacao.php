@@ -70,6 +70,7 @@ class DAOEmpresaImportacao{
      * faz a edição na tabela empresa_forma_importacao
      * @var $ID_Empresa
      * @var $ID_Importacao (1 a 10, passou disso, lançar excessão)
+     * @var $ID_EmpresaImportacao
      * @return TRUE|Exception
      */
     public function atualizarEmpresaImportacao($ID_Empresa, $ID_Importacao, $ID_EmpresaImportacao){
@@ -83,8 +84,8 @@ class DAOEmpresaImportacao{
             die;
         }else{
             $sqlUpdate = $conexaoDB->prepare("UPDATE empresa_forma_importacao set ID_Empresa = ?, 
-                                            ID_FormasImportacao = ? where = ID_EmpresaImportacao = ?");
-            $sqlUpdate->bind_param("III", $ID_Empresa, $ID_Importacao, $ID_EmpresaImportacao);
+                                            ID_FormasImportacao = ? where ID_EmpresaImportacao = ?");
+            $sqlUpdate->bind_param("iii", $ID_Empresa, $ID_Importacao, $ID_EmpresaImportacao);
             $sqlUpdate->execute();
             if(!$sqlUpdate->error){
                 $retorno = TRUE;
@@ -149,7 +150,7 @@ class DAOEmpresaImportacao{
 
         if($resultado->num_rows !== 0){
             while($linha = $resultado->fetch_assoc()){
-                $empresaImportacao = new empresaImportacao($linha['ID_EmpresaImportacao'], $linha['ID_Empresa'], $linha['ID_Importacao']);
+                $empresaImportacao = new empresaImportacao($linha['ID_EmpresaImportacao'], $linha['ID_Empresa'], $linha['ID_FormasImportacao']);
                 $formasImportacao[] = $empresaImportacao;
             }
         }else{
@@ -158,6 +159,32 @@ class DAOEmpresaImportacao{
         $conexaoDB->close();
         $sqlBusca->close();
         return $formasImportacao;
+    }
+
+    /**
+     * recebe o ID da importacao e retorna a forma de importacao
+     * @var int $ID_FormasImportacao
+     * @return Array[formasImportacao]|Exception;
+     */
+    public function buscarImportacao($ID_FormasImportacao){
+        try{
+            $conexaoDB = $this->conectarBanco();
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+        $importacoes = [];
+
+        $sqlBusca = $conexaoDB->prepare("SELECT Tipo_FormaImportacao
+                                        from formas_importacao where ID_FormasImportacao = ?");
+        $sqlBusca->bind_param("i", $ID_FormasImportacao);
+        $sqlBusca->execute();
+        $resultado = $sqlBusca->get_result();
+        if($resultado !== 0){
+            $importacoes[] = $resultado;
+            return $importacoes;
+        }else{
+            throw new \Exception("Erro! Não foi possível localizar as formas de importacao");
+        }
     }
 }
 ?>
