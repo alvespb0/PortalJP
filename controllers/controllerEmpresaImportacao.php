@@ -91,41 +91,16 @@ class ControllerEmpresaImportacao{
             foreach($resultado as $indice => $i){
                 $importacoes[] = $daoEmpresaImp->buscarImportacao($i->ID_Importacao);
             }
-            foreach($importacoes as $l ){
-                echo $l;
-            }
+            /* foreach ($importacoes as $imp) {
+                foreach ($imp as $item) {
+                    echo $item->Tipo_FormaImportacao . "<br>";
+                }
+            } */
+           return $importacoes;
+
         }catch(\Exception $e){
             throw new \Exception("Erro: ".$e->getMessage());
         }
     }
-/*     public function listaImportacoes($ID_Empresa){
-        $resultado = $this->listaEmpresaImportacao($ID_Empresa);
-        $importacoes = [];
-        try{
-        foreach($resultado as $indice => $i){
-            $idImportacao[] = $i->ID_Importacao;
-        }
-        foreach($idImportacao as $i){
-            switch($i){
-                case 1:
-                    $importacoes [] = 'Entradas por sped';
-                    break;
-                case 2:
-                    $importacoes [] = 'Saidas por sped';
-                    break;
-                case 3:
-                    $importacoes[] = 'NFCe por sped';
-                    break;
-                case 4:
-                    $importacoes[] = 'Entradas por Xml';
-            }
-        }
-        foreach($importacoes as $l){
-            echo $l;
-        }
-        }catch(\Exception $e){
-            throw new \Exception("Erro: ".$e->getMessage());
-        }
-    } */
 }
 ?>

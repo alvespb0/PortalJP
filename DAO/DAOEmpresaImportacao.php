@@ -180,7 +180,7 @@ class DAOEmpresaImportacao{
         $sqlBusca->execute();
         $resultado = $sqlBusca->get_result();
         if($resultado !== 0){
-            $importacoes[] = $resultado;
+            $importacoes[] = $resultado->fetch_object();;
             return $importacoes;
         }else{
             throw new \Exception("Erro! Não foi possível localizar as formas de importacao");
