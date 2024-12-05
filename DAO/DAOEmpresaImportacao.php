@@ -37,8 +37,8 @@ class DAOEmpresaImportacao{
 
     /**
      * Faz a inclusão na tabela empresa_forma_importacao
-     * @var $ID_Empresa
-     * @var $ID_Importacao (1 a 10, passou disso, lançar excessão)
+     * @param int $ID_Empresa
+     * @param int $ID_Importacao (1 a 10, passou disso, lançar excessão)
      * @return TRUE|Exception
      */
     public function incluirEmpresaImportacao($ID_Empresa, $ID_Importacao){
@@ -68,9 +68,9 @@ class DAOEmpresaImportacao{
 
     /**
      * faz a edição na tabela empresa_forma_importacao
-     * @var $ID_Empresa
-     * @var $ID_Importacao (1 a 10, passou disso, lançar excessão)
-     * @var $ID_EmpresaImportacao
+     * @param int $ID_Empresa
+     * @param int $ID_Importacao (1 a 10, passou disso, lançar excessão)
+     * @param int $ID_EmpresaImportacao
      * @return TRUE|Exception
      */
     public function atualizarEmpresaImportacao($ID_Empresa, $ID_Importacao, $ID_EmpresaImportacao){
@@ -101,7 +101,7 @@ class DAOEmpresaImportacao{
 
     /**
      * recebe o ID da empresa que está sendo excluída, e deleta todos os registros encontrados
-     * @var $ID_Empresa
+     * @param int $ID_Empresa
      * @return TRUE|Exception
      */
     public function excluirEmpresaImportacao($ID_Empresa){
@@ -128,7 +128,7 @@ class DAOEmpresaImportacao{
     
     /**
      * Recebe o ID da empresa que está sendo listada e retorna todas as formas de importacao
-     * @var $ID_Empresa
+     * @param int $ID_Empresa
      * @return Array[empresaImportacao]
      */
     public function buscarEmpresaImportacao($ID_Empresa){
@@ -163,7 +163,7 @@ class DAOEmpresaImportacao{
 
     /**
      * recebe o ID da importacao e retorna a forma de importacao
-     * @var int $ID_FormasImportacao
+     * @param int $ID_FormasImportacao
      * @return Array[formasImportacao]|Exception;
      */
     public function buscarImportacao($ID_FormasImportacao){

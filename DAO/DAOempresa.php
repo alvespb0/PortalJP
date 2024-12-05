@@ -38,11 +38,11 @@ class DAOempresa{
 
     /**
      * Faz a inclusão da empresa 
-     * @var string $nome;
-     * @var string $cnpj;
-     * @var string $endereco;
-     * @var string $links;
-     * @var string $particularidades;
+     * @param string $nome;
+     * @param string $cnpj;
+     * @param string $endereco;
+     * @param string $links;
+     * @param string $particularidades;
      * @return TRUE|EXCEPTION
      */
     public function incluirEmpresa($nome, $cnpj, $endereco, $links, $particularidades){
@@ -70,11 +70,11 @@ class DAOempresa{
     
     /**
      * Faz a alteração da empresa
-     * @var string $nome;
-     * @var string $cnpj;
-     * @var string $endereco;
-     * @var string $links;
-     * @var string $particularidades;
+     * @param string $nome;
+     * @param string $cnpj;
+     * @param string $endereco;
+     * @param string $links;
+     * @param string $particularidades;
      * @return TRUE|EXCEPTION
      */
     public function atualizarEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $id){
@@ -107,7 +107,7 @@ class DAOempresa{
 
     /**
      * Faz a exclusão de uma empresa
-     * @var string $cnpj Exclusão pelo CNPJ
+     * @param string $cnpj Exclusão pelo CNPJ
      * @return TRUE|Exception
      */
     public function excluirEmpresa($cnpj){

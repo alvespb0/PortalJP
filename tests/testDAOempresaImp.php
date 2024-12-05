@@ -8,7 +8,7 @@ $testDAO = new DAOEmpresaImportacao();
 /* $testDAO->incluirEmpresaImportacao(4,3); */ /* Inclusão funcionando, testado excessões */
 
 /**teste de edição */
-/* $testDAO->atualizarEmpresaImportacao(4,3,1); */ /* Edição funcionando, testado excessões */
+/* $testDAO->atualizarEmpresaImportacao(4,3,9); */ /* Edição funcionando, testado excessões */
 
 /**teste de listagem */
 /* $resultado = $testDAO->buscarEmpresaImportacao(4); /* Listagem funcionando, retornando array de objetos */
