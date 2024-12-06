@@ -163,7 +163,7 @@ class DAOEmpresaRecebimento{
     /**
      * recebe o ID da empresa e retorna as os ID's das subformas atreladas a esse ID da empresa
      * Após isso faz uma consulta na tabela de subforma
-     * @param int $ID_SubFormaRecebimento
+     * @param int $ID_Empresa
      * @return Array[subformasRecebimento]|Exception
      */
     public function buscarSubformasRecebimento($ID_Empresa){

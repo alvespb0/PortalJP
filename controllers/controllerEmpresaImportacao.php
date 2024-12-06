@@ -19,6 +19,7 @@ class ControllerEmpresaImportacao{
         try{
             $daoEmpresaImp->incluirEmpresaImportacao($empresaImportacao->ID_Empresa, $empresaImportacao->ID_Importacao);
             unset($daoEmpresaImp);
+            return true;
         }catch (\Exception $e){
             unset($daoEmpresaImp);
             throw new \Exception("Não foi possível incluir".$e->getmessage());

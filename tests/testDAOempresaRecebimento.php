@@ -17,7 +17,8 @@ $testDAO = new DAOEmpresaRecebimento();
 /* $testDAO->excluirEmpresaRecebimento(4); */ /* Teste de exclusão funcionando */
 
 /* Teste busca subformas de recebimento */
-/* $sub = $testDAO->buscarSubformasRecebimento(4); /* Busca de Subformas funcionando */
+$sub = $testDAO->buscarSubformasRecebimento(4); /* Busca de Subformas funcionando */
+var_dump($sub);
  
 /* Teste busca formas recebimento */
 /* echo $testDAO->buscarFormasRecebimento(5); */ /* Busca de formas de recebimento funcionando */

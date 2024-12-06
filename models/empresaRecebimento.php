@@ -24,7 +24,7 @@ class EmpresaRecebimento{
      */
     public $ID_SubFormaRecebimento;
 
-    public function __construct($ID_EmpresaFormaRecebimento = null, $ID_Empresa, $ID_SubFormaRecebimento){
+    public function __construct($ID_EmpresaFormaRecebimento = null, $ID_Empresa = null, $ID_SubFormaRecebimento = null){
         $this->ID_EmpresaFormaRecebimento = $ID_EmpresaFormaRecebimento;
         $this->ID_Empresa = $ID_Empresa;
         $this->ID_SubFormaRecebimento = $ID_SubFormaRecebimento;
