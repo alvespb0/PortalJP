@@ -43,16 +43,22 @@ class Empresa{
      * @var string
      */
     public $particularidades;
+
+    /**
+     * Outras observações
+     * @var string
+     */
+    public $observacoes;
     
     public function __construct($ID_Empresa = null, $CNPJ_Empresa = null, $endereco_Empresa = null, $links_Empresa = null,
-                                 $nome_Empresa = null, $particularidades = null){
+                                 $nome_Empresa = null, $particularidades = null, $observacoes = null){
         $this->ID_Empresa = $ID_Empresa;
         $this->CNPJ_Empresa = $CNPJ_Empresa;
         $this->endereco_Empresa = $endereco_Empresa;
         $this->links_Empresa = $links_Empresa;
         $this->nome_Empresa = $nome_Empresa;
         $this->particularidades = $particularidades;
-
+        $this->observacoes = $observacoes;
     }
 
 }

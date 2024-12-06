@@ -43,9 +43,10 @@ class DAOempresa{
      * @param string $endereco;
      * @param string $links;
      * @param string $particularidades;
+     * @param string $observacoes
      * @return TRUE|EXCEPTION
      */
-    public function incluirEmpresa($nome, $cnpj, $endereco, $links, $particularidades){
+    public function incluirEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $observacoes){
         try{
             $conexaoDB = $this->conectarBanco();
         }catch(\Exception $e){
@@ -53,8 +54,8 @@ class DAOempresa{
         }
 
         $sqlInsert = $conexaoDB->prepare("INSERT INTO empresa(nome_Empresa, CNPJ_Empresa,
-                                        endereco_Empresa, links_Empresa, particularidades) values (?,?,?,?,?)");
-        $sqlInsert->bind_param("sssss", $nome, $cnpj, $endereco, $links, $particularidades);
+                                        endereco_Empresa, links_Empresa, particularidades, observacoes) values (?,?,?,?,?,?)");
+        $sqlInsert->bind_param("ssssss", $nome, $cnpj, $endereco, $links, $particularidades, $observacoes);
         $sqlInsert->execute();
 
         if(!$sqlInsert->error){
@@ -75,9 +76,11 @@ class DAOempresa{
      * @param string $endereco;
      * @param string $links;
      * @param string $particularidades;
+     * @param string $observacoes
+     * @param int $id
      * @return TRUE|EXCEPTION
      */
-    public function atualizarEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $id){
+    public function atualizarEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $id){
         try{
             $conexaoDB = $this->conectarBanco();
         }catch(\Exception $e){
@@ -89,9 +92,10 @@ class DAOempresa{
                                         CNPJ_Empresa = ?,
                                         endereco_Empresa = ?,
                                         links_Empresa = ?,
-                                        particularidades = ?
+                                        particularidades = ?,
+                                        observacoes = ?
                                         where ID_Empresa = ?");
-        $sqlUpdate->bind_param("sssssi", $nome, $cnpj, $endereco, $links, $particularidades, $id);
+        $sqlUpdate->bind_param("ssssssi", $nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $id);
         $sqlUpdate->execute();
         
         if(!$sqlUpdate->error){
@@ -146,8 +150,7 @@ class DAOempresa{
         #array que será retornado uma ou mais empresas
         $empresas = array();
 
-        $sqlBusca = $conexaoDB->prepare("SELECT ID_Empresa, nome_Empresa, CNPJ_Empresa, 
-                                        endereco_Empresa, links_Empresa, particularidades
+        $sqlBusca = $conexaoDB->prepare("SELECT *
                                         FROM empresa
                                         where CNPJ_Empresa = ?");
         $sqlBusca->bind_param("s", $cnpj);
@@ -158,7 +161,7 @@ class DAOempresa{
         if($resultado->num_rows !== 0){
             while($linha = $resultado->fetch_assoc()){
                 $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
-                                        $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades']);
+                                        $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']);
                 $empresas[] = $empresa;
             }
         }else{
