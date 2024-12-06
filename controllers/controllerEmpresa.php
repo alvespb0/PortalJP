@@ -19,7 +19,7 @@ class ControllerEmpresa{
         $daoEmpresa = new DAOempresa();
         try{
             $daoEmpresa->incluirEmpresa($empresa->nome_Empresa, $empresa->CNPJ_Empresa, $empresa->endereco_Empresa,
-                                        $empresa->links_Empresa, $empresa->particularidades);
+                                        $empresa->links_Empresa, $empresa->particularidades, $empresa->observacoes);
             unset($daoEmpresa);                                        
             return true;
         }catch (\Exception $e){
@@ -54,7 +54,7 @@ class ControllerEmpresa{
         $daoEmpresa = new DAOempresa();
         try{
             $daoEmpresa->atualizarEmpresa($empresa->nome_Empresa, $empresa->CNPJ_Empresa, $empresa->endereco_Empresa,
-                                        $empresa->links_Empresa, $empresa->particularidades, $empresa->ID_Empresa);
+                                        $empresa->links_Empresa, $empresa->particularidades, $empresa->observacoes, $empresa->ID_Empresa);
             unset($daoEmpresa);                                        
             return true;
         }catch (\Exception $e){
