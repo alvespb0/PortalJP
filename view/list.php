@@ -99,7 +99,7 @@ if(isset($_POST['pesquisar'])){
                                 <div class='col-md-6'>
                                     <form method='GET' action='edit.php' class='m-0'>
                                         <input type='hidden' name='ID_empresa' value='" . htmlspecialchars($e->ID_Empresa) . "'>
-                                            <button type='submit' name='delete' class='btn btn-danger btn-sm w-100' style='background-color: #043464; color: white;);'>
+                                            <button type='submit' name='Edit' class='btn btn-danger btn-sm w-100' style='background-color: #043464; color: white;);'>
                                             Editar
                                         </button>
                                     </form>
