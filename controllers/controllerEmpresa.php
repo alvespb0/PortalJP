@@ -66,20 +66,80 @@ class ControllerEmpresa{
     /**
      * recebe um CNPJ para fazer a busca da empresa
      * @param string $cnpj
-     * @return Array $empresa|Exception
+     * @return Array|False
      */
-    public function listaEmpresa($cnpj){
+    public function listaEmpresaByCnpj($search){
         $daoEmpresa = new DAOempresa();
         try{
-            $empresa = $daoEmpresa->buscarEmpresa($cnpj);
+            $empresa = $daoEmpresa->buscarEmpresa($search);
             if(count($empresa)>0){
                 return $empresa;
             }else{
-                throw new \Exception("Empresa não localizada com o CNPJ: " . $cnpj);
+                return false;
             }
         }catch(\Exception $e){
             throw new \Exception("Erro: ".$e->getMessage());
         }
-    }    
+    }
+    
+    /**
+     * recebe um nome para fazer a busca da empresa
+     * @param string $search
+     * @return Array|False
+     */
+    public function listaEmpresaByName($search){
+        $daoEmpresa = new DAOempresa();
+        try{
+            $empresa = $daoEmpresa->buscarEmpresaSearch($search);
+            if(count($empresa)>0){
+                return $empresa;
+            }else{
+                return false;
+            }
+        }catch(\Exception $e){
+            throw new \Exception("Erro: ".$e->getMessage());
+        }
+    }
+    
+    /**
+     * recebe um search e executa as funções listaEmpresaByCnpj e listaEmpresaByName
+     * verifica qual é falsa e retorna a array correta
+     * se as duas forem falsas retorna false
+     * @param string $search
+     * @return bool|Array 
+     */
+    public function listaEmpresa($search){
+        try{
+            $listaEmpresaCNPJ = $this->listaEmpresaByCnpj($search);
+            $listaEmpresaNome = $this->listaEmpresaByName($search);
+            if($listaEmpresaCNPJ !== false){
+                return $listaEmpresaCNPJ;
+            }else if($listaEmpresaNome !== false){
+                return $listaEmpresaNome;
+            }else{
+                return false;
+            }
+        }catch (\Exception $e) {
+            throw new \Exception("Erro ao buscar empresa: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Não recebe parâmetro, apenas chama a função da DAO para listar todas as empresas
+     * @return Array|Exception
+     */
+    public function listaTodasEmpresas(){
+        $daoEmpresa = new DAOempresa();
+        try{
+            $empresa = $daoEmpresa->buscaTodasEmpresas();
+            if(count($empresa)>0){
+                return $empresa;
+            }else{
+                echo "nenhuma empresa cadsatrada";
+            }
+        }catch (\Exception $e) {
+            throw new \Exception("Erro ao buscar empresa: " . $e->getMessage());
+        }
+    }
 }
 ?>

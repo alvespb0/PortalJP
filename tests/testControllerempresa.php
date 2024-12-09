@@ -19,16 +19,27 @@ $empresaController = new ControllerEmpresa();
 /* $empresaController->salvarEmpresa($empresa); */ /** Inclusão funcionando */
 
 /**Teste de busca */
-$empresas = $empresaController->listaEmpresa($empresa->CNPJ_Empresa); /** Busca funcionando normal, NÃO DEIXADO COMENTADO devido a necessitar do ID para o editar*/
-
-foreach($empresas as $indice => $e){
-    $id = $e->ID_Empresa;
-}
-$empresa->ID_Empresa = $id;
+/* $empresas = $empresaController->listaEmpresa($empresa->CNPJ_Empresa); */ /** Busca funcionando normal, NÃO DEIXADO COMENTADO devido a necessitar do ID para o editar*/
+/*  */
+/* foreach($empresas as $indice => $e){ */
+/*     $id = $e->ID_Empresa; */
+/* } */
+/* $empresa->ID_Empresa = $id; */
 
 /**teste de edição*/
 /* $empresaController->editarEmpresa($empresa); */ /**Edição funcionando */
 
 /**teste de exclusão */
 /* $empresaController->deleteEmpresa('987654321'); */ /**Exclusão funcionando */
+
+/* Teste de busca pelo CNPJ E pelo nome, foi ajustado da primeira versão da função */
+/* $empresas = $empresaController->listaEmpresa('126246159'); */ /* funcionando */
+
+/* Teste de busca para todas as empresas */
+$empresas = $empresaController->listaTodasEmpresas(); /* funcionando */
+
+foreach($empresas as $e){
+    echo $e->CNPJ_Empresa;
+}
+
 ?>

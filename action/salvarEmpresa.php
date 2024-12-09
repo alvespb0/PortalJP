@@ -44,34 +44,35 @@ if(!isset($_POST['ControllerEmpresaImportacao'])){
         $controllerEmpresaImportacao->salvarEmpresaImportacao($empresaImp);
     }
 
-    $formaRecebimeto = $_POST['forma_recebimento'];
+    $formaRecebimeto = intval($_POST['forma_recebimento']);
     $subRecebimentos = array();
     $subRecebimentos = $_POST['subformas_recebimento'];
     foreach($subRecebimentos as $sub){
+        $sub = intval($sub);
         $empresaRec = new EmpresaRecebimento();
         $empresaRec->ID_Empresa = $empresa->ID_Empresa;
-        if($formaRecebimeto == 1 && $subRecebimentos == 1){
+        if($formaRecebimeto == 1 && $sub == 1){
             $empresaRec->ID_SubFormaRecebimento = 1;
-        }else if($formaRecebimeto == 1 && $subRecebimentos == 2){
+        }else if($formaRecebimeto == 1 && $sub == 2){
             $empresaRec->ID_SubFormaRecebimento = 2;
-        }else if($formaRecebimeto == 1 && $subRecebimentos == 3){
+        }else if($formaRecebimeto == 1 && $sub == 3){
             $empresaRec->ID_SubFormaRecebimento = 3;
-        }else if($formaRecebimeto == 1 && $subRecebimentos == 4){
+        }else if($formaRecebimeto == 1 && $sub == 4){
             $empresaRec->ID_SubFormaRecebimento = 4;
-        }else if($formaRecebimeto == 1 && $subRecebimentos == 5){
+        }else if($formaRecebimeto == 1 && $sub == 5){
             $formaRecebimeto = 3;
             $empresaRec->ID_SubFormaRecebimento = 10;
-        }else if($formaRecebimeto == 2 && $subRecebimentos == 5){
+        }else if($formaRecebimeto == 2 && $sub == 5){
             $empresaRec->ID_SubFormaRecebimento = 5;
-        }else if($formaRecebimeto == 3 && $subRecebimentos == 1){
+        }else if($formaRecebimeto == 3 && $sub == 1){
             $empresaRec->ID_SubFormaRecebimento = 6;
-        }else if($formaRecebimeto == 3 && $subRecebimentos == 2){
+        }else if($formaRecebimeto == 3 && $sub == 2){
             $empresaRec->ID_SubFormaRecebimento = 7;
-        }else if($formaRecebimeto == 3 && $subRecebimentos == 3){
+        }else if($formaRecebimeto == 3 && $sub == 3){
             $empresaRec->ID_SubFormaRecebimento = 8;
-        }else if($formaRecebimeto == 3 && $subRecebimentos == 4){
+        }else if($formaRecebimeto == 3 && $sub == 4){
             $empresaRec->ID_SubFormaRecebimento = 9;
-        }else if($formaRecebimeto == 3 && $subRecebimentos == 5){
+        }else if($formaRecebimeto == 3 && $sub == 5){
             $empresaRec->ID_SubFormaRecebimento = 10;
         }else{
             echo "entrou aqui";

@@ -19,5 +19,4 @@ $testDAO = new DAOempresa();
 /**teste de exclusão da empresa */
 #$testDAO->excluirEmpresa(123456); /** Exclusão funcionando adequadamente */
 
-
 ?>

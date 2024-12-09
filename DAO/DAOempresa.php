@@ -139,7 +139,7 @@ class DAOempresa{
     /**
      * Busca a empresa no banco de dados para search ou visualização
      * @param string $cnpj
-     * @return Array[empresa]
+     * @return Array[empresa]|false
      */
     public function buscarEmpresa($cnpj){
         try{
@@ -165,11 +165,83 @@ class DAOempresa{
                 $empresas[] = $empresa;
             }
         }else{
-            echo "nenhuma empresa localizada!";
+            $conexaoDB->close();
+            $sqlBusca->close();
+            return $empresas;
         }
         $conexaoDB->close();
         $sqlBusca->close();
         return $empresas;
+    }
+
+    /**
+     * Busca a empresa no banco de dados via SEARCH
+     * @param string $search
+     * @return Array|Exception
+     */
+    public function buscarEmpresaSearch($search = ''){
+        try{
+            $conexaoDB = $this->conectarBanco();
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+
+        $empresas = array();
+        $search = "%".$search."%";
+
+        $sqlBusca = $conexaoDB->prepare("SELECT * FROM empresa where nome_Empresa like ?");
+        $sqlBusca->bind_param("s", $search);
+        $sqlBusca->execute();
+
+        $resultado = $sqlBusca->get_result();
+        if($resultado->num_rows > 0){
+            while ($linha = $resultado->fetch_assoc()){
+                $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
+                $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']);
+                $empresas[] = $empresa;
+            }
+        }else{
+            $conexaoDB->close();
+            $sqlBusca->close();
+            return $empresas;
+        }
+        $conexaoDB->close();
+        $sqlBusca->close();
+        return $empresas;
+    }
+
+    /**
+     * Não recebe parâmetro, apenas faz a consulta SQL que lista todas as empresas
+     * @return Array|Exception
+     */
+    public function buscaTodasEmpresas(){
+        try{
+            $conexaoDB = $this->conectarBanco();
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+        try{
+            $sqlBusca = "SELECT * FROM empresa";
+            $resultado = $conexaoDB->query($sqlBusca);
+    
+            if ($resultado === false) {
+                throw new \Exception("Erro ao executar a consulta: " . $conexaoDB->error); 
+            }else{
+    
+            $empresas = array(); 
+            while ($linha = $resultado->fetch_assoc()) {
+                $empresa = new Empresa(
+                    $linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
+                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']
+                );
+                $empresas[] = $empresa;
+            }
+            $conexaoDB->close();
+            return $empresas; 
+        }
+        }catch (Exception $e){
+            throw new \Exception("Nenhuma empresa Cadastrada ".$e->getMessage());
+        }
     }
 }
 
