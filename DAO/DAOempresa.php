@@ -243,6 +243,45 @@ class DAOempresa{
             throw new \Exception("Nenhuma empresa Cadastrada ".$e->getMessage());
         }
     }
+
+    /**
+     * Recebe um ID (via metodo GET, através da página de LIST) e retorna um array
+     * com as informações da empresa
+     * @param int $id
+     * @return Array|Exception
+     */
+    public function buscaEmpresaById($id){
+        try{
+            $conexaoDB = $this->conectarBanco();
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+        try{
+            intval($id);
+            $empresas = array();
+            $sqlBusca = $conexaoDB->prepare("SELECT * FROM empresa where ID_Empresa = ?");
+            $sqlBusca->bind_param("i", $id);
+            $sqlBusca->execute();
+            
+            $resultado = $sqlBusca->get_result();
+            if($resultado->num_rows > 0){
+                while ($linha = $resultado->fetch_assoc()){
+                    $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
+                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']);
+                    $empresas[] = $empresa;
+                }
+            }else{
+                $conexaoDB->close();
+                $sqlBusca->close();
+                return $empresas;
+            }
+            $conexaoDB->close();
+            $sqlBusca->close();
+            return $empresas;
+        }catch (Exception $e){
+            throw new \Exception("Nenhuma empresa Cadastrada ".$e->getMessage());
+        }
+    }
 }
 
 

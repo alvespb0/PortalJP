@@ -141,5 +141,25 @@ class ControllerEmpresa{
             throw new \Exception("Erro ao buscar empresa: " . $e->getMessage());
         }
     }
+
+    /**
+     * Recebe um ID (via metodo GET, através da página de LIST) e retorna um array
+     * com as informações da empresa
+     * @param int $id
+     * @return array
+     */
+    public function listaEmpresaById($id){
+        $daoEmpresa = new DAOempresa();
+        try{
+            $empresa = $daoEmpresa->buscaEmpresaById($id);
+            if(count($empresa)>0){
+                return $empresa;
+            }else{
+                echo "isso não era para ocorrer! Comunique Arthur";
+            }
+        }catch (\Exception $e) {
+            throw new \Exception("Erro ao buscar empresa: " . $e->getMessage());
+        }
+    }
 }
 ?>

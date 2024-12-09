@@ -6,7 +6,12 @@ use controllers\ControllerEmpresa;
 
 $empresaController = new ControllerEmpresa();
 
-$empresas = $empresaController->listaTodasEmpresas();
+
+if(isset($_POST['pesquisar'])){
+    $empresas = $empresaController->listaEmpresa($_POST['search']);
+}else{
+    $empresas = $empresaController->listaTodasEmpresas();
+}
 
 ?>
 <!DOCTYPE html>
@@ -60,7 +65,7 @@ $empresas = $empresaController->listaTodasEmpresas();
             <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Pesquisar Empresa...">
                 <div class="input-group-append">
-                    <button class="btn" type="submit">Pesquisar</button>
+                    <button class="btn" name = "pesquisar" type="submit">Pesquisar</button>
                 </div>
             </div>
         </form>
@@ -75,9 +80,11 @@ $empresas = $empresaController->listaTodasEmpresas();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($empresas as $e){
+                <?php
+                    if($empresas){ 
+                    foreach($empresas as $e){
                     echo "<tr>";
-                    echo "<td><a href='details.php'?id=".urlencode($e->ID_Empresa)."'>".htmlspecialchars($e->nome_Empresa)."</a></td>";
+                    echo "<td><a href='detail.php?id=".urlencode($e->ID_Empresa)."'>".htmlspecialchars($e->nome_Empresa)."</a></td>";
                     echo "<td>".htmlspecialchars($e->CNPJ_Empresa)."</td>";
                     echo "<td>
                             <div class='row'>
@@ -100,7 +107,7 @@ $empresas = $empresaController->listaTodasEmpresas();
                             </div>
                         </td>";
                     echo "</tr>";
-                } 
+                }} 
                 ?>
             </tbody>
         </table>
