@@ -77,6 +77,8 @@ if(isset($_POST['cadastrar'])){
         // Faz a inserção dos novos registros
         $controllerEmpresaRecebmento->salvarEmpresaRecebimento($empresaRec);
     }
+    header("Location: ../view/list.php"); 
+    exit;
 }else{
     echo 'você não deveria estar aqui!';
     header("Location: ../view/form.php"); 

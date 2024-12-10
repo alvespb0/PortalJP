@@ -54,7 +54,7 @@ include_once('navbar.php');
 <body>
     <div class="container">
         <h1>Formulário de Cadastro de Empresa</h1>
-        <form action="../action/salvarEmpresa.php" method="post">
+        <form action="../action/salvarEmpresa.php" method="post" id="formCadastro">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome da Empresa</label>
                 <input type="text" id="nome" name="nome_empresa" class="form-control" placeholder="Nome da Empresa" required>
@@ -178,6 +178,53 @@ include_once('navbar.php');
             <button type="submit" name = "cadastrar" class="btn btn-primary">Criar Empresa</button>
         </form>
     </div>
+    <script>
+        // Função para validar se pelo menos uma forma de importação foi selecionada
+        function validarImportacoes() {
+            const importacoes = document.querySelectorAll('input[name="importacao[]"]'); // Seleciona todos os checkboxes
+            let selecionado = false;
+
+            // Verifica se algum checkbox foi marcado
+            importacoes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    selecionado = true;
+                }
+            });
+
+            // Se nenhum checkbox estiver marcado, exibe um alerta e retorna false
+            if (!selecionado) {
+                alert("Por favor, selecione pelo menos uma forma de importação.");
+                return false; // Impede o envio do formulário
+            }
+
+            // Se pelo menos um checkbox foi marcado, permite o envio do formulário
+            return true;
+        }
+                // Função para validar as formas de recebimento
+        function validarRecebimento() {
+            const subformasRecebimento = document.querySelectorAll('input[name="subformas_recebimento[]"]');
+            
+            // Verifica se pelo menos uma subforma foi selecionada
+            let subformSelecionada = Array.from(subformasRecebimento).some(checkbox => checkbox.checked);
+
+            // Valida se pelo menos uma subforma de recebimento foi selecionada
+            if (!subformSelecionada) {
+                alert("Por favor, selecione pelo menos uma subforma de recebimento.");
+                return false;
+            }
+
+            // Se a subforma foi selecionada, permite o envio
+            return true;
+        }
+
+
+        // Adiciona o evento de validação ao formulário
+        document.getElementById("formCadastro").addEventListener("submit", function(event) {
+            if (!validarImportacoes() || !validarRecebimento()) {
+                event.preventDefault(); // Impede o envio se alguma validação falhar
+            }
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
