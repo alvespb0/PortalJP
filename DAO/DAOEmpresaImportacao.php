@@ -186,5 +186,38 @@ class DAOEmpresaImportacao{
             throw new \Exception("Erro! Não foi possível localizar as formas de importacao");
         }
     }
+
+    /**
+     * Recebe o ID da empresa e o ID da empresa importacao
+     * verifica se existe no bd e retorna true ou false
+     * @param int $ID_Empresa
+     * @param int $ID_importacao
+     * @return bool|Exception
+     */
+    public function validaSubForma($ID_Empresa, $ID_Importacao){
+        try{
+            $conexaoDB = $this->conectarBanco();
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+        try{
+            $sqlBusca = $conexaoDB->prepare("SELECT * from empresa_forma_importacao
+                                            where ID_Empresa = ? AND ID_FormasImportacao = ?");
+            $sqlBusca->bind_param("ii", $ID_Empresa, $ID_Importacao);
+            $sqlBusca->execute();
+            $resultado = $sqlBusca->get_result();
+            if($resultado->num_rows > 0){
+                $sqlBusca->close();
+                $conexaoDB->close();
+                return true;
+            }else{
+                $sqlBusca->close();
+                $conexaoDB->close();
+                return false;
+            }
+        }catch(\Exception $e){
+            die("Não foi possível validar".$e->getMessage());
+        }
+    }
 }
 ?>

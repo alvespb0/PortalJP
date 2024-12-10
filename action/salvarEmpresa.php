@@ -19,7 +19,7 @@ $controllerEmpresa = new ControllerEmpresa;
 $controllerEmpresaRecebmento = new ControllerEmpresaRecebimento;
 $controllerEmpresaImportacao = new ControllerEmpresaImportacao;
 
-if(!isset($_POST['ControllerEmpresaImportacao'])){
+if(isset($_POST['cadastrar'])){
     $empresa = new Empresa();
     $empresa->nome_Empresa = $_POST['nome_empresa'];
     $empresa->CNPJ_Empresa = $_POST['cnpj_empresa'];
@@ -44,40 +44,37 @@ if(!isset($_POST['ControllerEmpresaImportacao'])){
         $controllerEmpresaImportacao->salvarEmpresaImportacao($empresaImp);
     }
 
-    $formaRecebimeto = intval($_POST['forma_recebimento']);
-    $subRecebimentos = array();
-    $subRecebimentos = $_POST['subformas_recebimento'];
-    foreach($subRecebimentos as $sub){
-        $sub = intval($sub);
+    /* Informações sobre recebimentos */
+    $formaRecebimento = intval($_POST['forma_recebimento']);
+    $subRecebimentos = array_map('intval', $_POST['subformas_recebimento']); // Garante que os valores são inteiros
+
+    // Mapeamento direto de SUBFORMA para FORMA
+    $mapaSubForma = [
+        1 => 1, // Subforma 1 -> Forma 1
+        2 => 1, // Subforma 2 -> Forma 1
+        3 => 1, // Subforma 3 -> Forma 1
+        4 => 1, // Subforma 4 -> Forma 1
+        5 => 2, // Subforma 5 -> Forma 2
+        6 => 3, // Subforma 6 -> Forma 3
+        7 => 3, // Subforma 7 -> Forma 3
+        8 => 3, // Subforma 8 -> Forma 3
+        9 => 3, // Subforma 9 -> Forma 3
+        10 => 3 // Subforma 10 -> Forma 3
+    ];
+
+    foreach ($subRecebimentos as $sub) {
         $empresaRec = new EmpresaRecebimento();
         $empresaRec->ID_Empresa = $empresa->ID_Empresa;
-        if($formaRecebimeto == 1 && $sub == 1){
-            $empresaRec->ID_SubFormaRecebimento = 1;
-        }else if($formaRecebimeto == 1 && $sub == 2){
-            $empresaRec->ID_SubFormaRecebimento = 2;
-        }else if($formaRecebimeto == 1 && $sub == 3){
-            $empresaRec->ID_SubFormaRecebimento = 3;
-        }else if($formaRecebimeto == 1 && $sub == 4){
-            $empresaRec->ID_SubFormaRecebimento = 4;
-        }else if($formaRecebimeto == 1 && $sub == 5){
-            $formaRecebimeto = 3;
-            $empresaRec->ID_SubFormaRecebimento = 10;
-        }else if($formaRecebimeto == 2 && $sub == 5){
-            $empresaRec->ID_SubFormaRecebimento = 5;
-        }else if($formaRecebimeto == 3 && $sub == 1){
-            $empresaRec->ID_SubFormaRecebimento = 6;
-        }else if($formaRecebimeto == 3 && $sub == 2){
-            $empresaRec->ID_SubFormaRecebimento = 7;
-        }else if($formaRecebimeto == 3 && $sub == 3){
-            $empresaRec->ID_SubFormaRecebimento = 8;
-        }else if($formaRecebimeto == 3 && $sub == 4){
-            $empresaRec->ID_SubFormaRecebimento = 9;
-        }else if($formaRecebimeto == 3 && $sub == 5){
-            $empresaRec->ID_SubFormaRecebimento = 10;
-        }else{
-            echo "entrou aqui";
+
+        if (isset($mapaSubForma[$sub])) {
+            $empresaRec->ID_SubFormaRecebimento = $sub;
+            $formaRecebimentoMapeada = $mapaSubForma[$sub];
+        } else {
+            echo "Subforma inválida: $sub";
+            continue; 
         }
-        echo $empresaRec->ID_SubFormaRecebimento;
+
+        // Faz a inserção dos novos registros
         $controllerEmpresaRecebmento->salvarEmpresaRecebimento($empresaRec);
     }
 }else{

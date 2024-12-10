@@ -29,7 +29,6 @@ foreach($resultado as $r){
     $ID_SubForma = $r->ID_SubFormaRecebimento;
 }
 $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_SubForma); #string
-echo $formaRecebimento;
 
 /* parte presente somente para verificação das boxes checked DE IMPOPRTACAO, isso só é presente na página de edit */
 $empresaImportacao = $controllerEmpresaImportacao->listaEmpresaImportacao($ID_Empresa);
@@ -92,8 +91,9 @@ foreach($empresaImportacao as $ei){
 </head>
 <body>
     <div class="container">
-        <h1>Formulário de Cadastro de Empresa</h1>
+        <h1>Formulário de Edição de Empresa</h1>
         <form action="../action/editarEmpresa.php" method="post">
+            <input type="hidden" name="ID_Empresa" value = "<?php echo $ID_Empresa; ?>">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome da Empresa</label>
                 <input type="text" id="nome" name="nome_empresa" class="form-control" placeholder="Nome da Empresa" value ="<?php foreach($empresa as $e){ echo $e->nome_Empresa;} ?>" required>
@@ -214,7 +214,7 @@ foreach($empresaImportacao as $ei){
                 <input type="text" id="OBS" name="OBS" class="form-control" placeholder="Observações" value = "<?php foreach($empresa as $e){ echo $e->observacoes;} ?>">
             </div>
 
-            <button type="submit" name = "cadastrar" class="btn btn-primary">Criar Empresa</button>
+            <button type="submit" name = "editar" class="btn btn-primary">Editar Empresa</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

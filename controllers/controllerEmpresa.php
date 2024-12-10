@@ -33,10 +33,10 @@ class ControllerEmpresa{
      * @param string $cnpj
      * @return TRUE|Exception
      */
-    public function deleteEmpresa($cnpj){
+    public function deleteEmpresa($id){
         $daoEmpresa = new DAOempresa();
         try{
-            $daoEmpresa->excluirEmpresa($cnpj);
+            $daoEmpresa->excluirEmpresa($id);
             unset($daoEmpresa);
             return true;
         }catch(\Exception $e){

@@ -89,7 +89,7 @@ if(isset($_POST['pesquisar'])){
                     echo "<td>
                             <div class='row'>
                                 <div class='col-md-6'>
-                                    <form method='POST' action='' class='m-0'>
+                                    <form method='GET' action='../action/excluirEmpresa.php' class='m-0'>
                                         <input type='hidden' name='delete_id' value='" . htmlspecialchars($e->ID_Empresa) . "'>
                                             <button type='submit' name='delete' class='btn btn-danger btn-sm w-100' style='background-color: #a40c1c; color: white; onclick='return confirm(\"Tem certeza que deseja excluir esta empresa?\");'>
                                             Excluir

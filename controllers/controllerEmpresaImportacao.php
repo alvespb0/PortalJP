@@ -92,16 +92,29 @@ class ControllerEmpresaImportacao{
             foreach($resultado as $indice => $i){
                 $importacoes[] = $daoEmpresaImp->buscarImportacao($i->ID_Importacao);
             }
-            /* foreach ($importacoes as $imp) {
-                foreach ($imp as $item) {
-                    echo $item->Tipo_FormaImportacao . "<br>";
-                }
-            } */
+
            return $importacoes;
 
         }catch(\Exception $e){
             throw new \Exception("Erro: ".$e->getMessage());
         }
     }
+
+    /**
+     * recebe um objeto do tipo Empresa Importacao e chama o método de validação de subforma;
+     * @param empresaImportacao $empresaImportacao;
+     * @return bool|Exception
+     */
+    public function verificarSubFormaCadastrada($empresaImportacao){
+        $daoEmpresaImp = new DAOEmpresaImportacao();
+        try{
+            $retorno = $daoEmpresaImp->validaSubForma($empresaImportacao->ID_Empresa, $empresaImportacao->ID_Importacao);
+            unset($daoEmpresaImp);
+            return $retorno;
+        }catch(\Exception $e){
+            throw new \Exception("Erro: ".$e->getMessage());
+        }
+    }
+
 }
 ?>

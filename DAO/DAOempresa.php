@@ -114,15 +114,15 @@ class DAOempresa{
      * @param string $cnpj Exclusão pelo CNPJ
      * @return TRUE|Exception
      */
-    public function excluirEmpresa($cnpj){
+    public function excluirEmpresa($id){
         try{
             $conexaoDB = $this->conectarBanco();
         }catch(\Exception $e){
             die($e->getMessage());
         }
 
-        $sqlDelete = $conexaoDB->prepare("DELETE from empresa where CNPJ_Empresa = ?");
-        $sqlDelete->bind_param("i", $cnpj);
+        $sqlDelete = $conexaoDB->prepare("DELETE from empresa where ID_Empresa = ?");
+        $sqlDelete->bind_param("i", $id);
         $sqlDelete->execute();
 
         if(!$sqlDelete->error){
