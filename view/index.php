@@ -12,12 +12,8 @@ include_once('navbar.php');
     <style>
         /* Corpo da página */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5; /* Fundo claro e suave */
-            margin: 0;
-            padding: 0;
+            background-color: #f8f9fa; /* Fundo claro e suave */
         }
-
         /* Centralização do conteúdo */
         .main-content {
             display: flex;
@@ -66,7 +62,8 @@ include_once('navbar.php');
 
         .btn-custom:hover {
             background-color: #ff6600; /* Efeito de hover para o botão */
-            text-decoration: none; /* Remove a linha de sublinhado */
+            text-decoration: none;
+            color: white; /* Remove a linha de sublinhado */
         }
 
     </style>

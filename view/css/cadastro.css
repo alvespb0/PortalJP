@@ -1,0 +1,57 @@
+body {
+    background-color: #f8f9fa; /* Cor de fundo leve */
+}
+.container {
+    margin-top: 30px;
+}
+h1 {
+    color: #002f47; /* Azul escuro igual ao da navbar */
+    margin-bottom: 30px;
+}
+.form-control, .form-select {
+    border-radius: 0;
+    border-color: #002f47; /* Bordas no mesmo tom de azul da navbar */
+    transition: border-color 0.3s ease-in-out; /* Transição suave nas bordas */
+}
+.form-control:focus, .form-select:focus {
+    border-color: #ff9900; /* Foco com a cor amarela similar ao hover da navbar */
+    box-shadow: 0 0 5px rgba(255, 153, 0, 0.5); /* Efeito de foco amarelado */
+}
+.form-label {
+    color: #002f47; /* Azul escuro */
+}
+.btn-primary {
+    background-color: #002f47; /* Azul escuro igual ao da navbar */
+    border-color: #002f47;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transição suave no botão */
+}
+.btn-primary:hover {
+    background-color: #ff9900; /* Cor amarela no hover */
+    border-color: #ff9900;
+}
+.form-check-input:checked {
+    background-color: #ff9900; /* Cor amarela no checked */
+    border-color: #ff9900;
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25); /* Efeito de foco amarelado */
+}
+.form-check-label {
+    color: #002f47; /* Azul escuro */
+}
+.mb-3, .mt-4 {
+    margin-bottom: 1.5rem;
+}
+.row {
+    margin-top: 1rem;
+}
+/* Estilo do botão de submissão */
+.btn-primary {
+    background-color: #002f47; /* Azul escuro */
+    border-color: #002f47;
+}
+
+.btn-primary:hover {
+    background-color: #ff9900; /* Amarelo no hover */
+    border-color: #ff9900;
+}

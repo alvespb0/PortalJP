@@ -1,0 +1,55 @@
+body {
+    background-color: #f8f9fa;
+}
+.container {
+    margin-top: 30px;
+    max-width: 900px; /* Limita a largura total da página */
+}
+h1, h3 {
+    color: #003366;
+}
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card-body {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+}
+.card h3 {
+    border-bottom: 2px solid #ff9900;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+.card p {
+    font-size: 1rem;
+    color: #555555;
+}
+ul {
+    list-style-type: none; /* Remove os pontos da lista */
+    padding-left: 0;
+}
+ul li {
+    margin-bottom: 5px; /* Espaço entre os itens */
+}
+.baixar{
+    background-color: #ff9900; /* Cor laranja vibrante */
+    color: white; /* Texto em branco */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 7px 12px; /* Espaçamento interno */
+    font-weight: bold; /* Texto em negrito */
+    border: 1px solid #e68a00; /* Borda mais suave */
+    text-decoration: none; /* Remove o sublinhado */
+    display: inline-block; /* Garante que o botão seja tratado como um bloco */
+    transition: background-color 0.3s, border-color 0.3s; /* Transições suaves */
+}
+.baixar:hover {
+    background-color: #e68a00; /* Cor mais escura no hover */
+    border-color: #cc7a00; /* Borda mais escura no hover */
+    text-decoration: none;
+    color: white;
+}

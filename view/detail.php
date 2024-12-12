@@ -33,46 +33,7 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Empresa</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 30px;
-            max-width: 900px; /* Limita a largura total da página */
-        }
-        h1, h3 {
-            color: #003366;
-        }
-        .card {
-            margin-bottom: 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .card-body {
-            background-color: #ffffff;
-            border-radius: 10px;
-            padding: 20px;
-        }
-        .card h3 {
-            border-bottom: 2px solid #c8102e;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        .card p {
-            font-size: 1rem;
-            color: #555555;
-        }
-        ul {
-            list-style-type: none; /* Remove os pontos da lista */
-            padding-left: 0;
-        }
-        ul li {
-            margin-bottom: 5px; /* Espaço entre os itens */
-        }
-    </style>
+    <link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
     <div class="container">
@@ -84,7 +45,7 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
                 <h3><?php foreach($empresa as $e){ echo $e->nome_Empresa;?></h3>
                 <p><strong>CNPJ:</strong> <?php echo  $e->CNPJ_Empresa; ?></p>
                 <p><strong>Endereço:</strong> <?php echo  $e->endereco_Empresa; }?></p>
-                <a href="../action/baixarArquivo.php?id=<?php echo $ID_Empresa; ?>" class="btn btn-primary">Baixar Arquivo</a>
+                <a href="../action/baixarArquivo.php?id=<?php echo $ID_Empresa; ?>" class="baixar">Baixar Arquivos</a>
                 </div>
         </div>
 

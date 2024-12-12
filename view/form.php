@@ -8,48 +8,7 @@ include_once('navbar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Cadastro de Empresa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: #f8f9fa; /* Cor de fundo leve */
-        }
-        .container {
-            margin-top: 30px;
-        }
-        h1 {
-            color: #003366; /* Azul escuro */
-            margin-bottom: 30px;
-        }
-        .form-control, .form-select {
-            border-radius: 0;
-        }
-        .form-label {
-            color: #003366; /* Azul escuro */
-        }
-        .btn-primary {
-            background-color: #c8102e; /* Vermelho */
-            border-color: #c8102e;
-        }
-        .btn-primary:hover {
-            background-color: #a00d1e; /* Vermelho escuro no hover */
-            border-color: #a00d1e;
-        }
-        .form-check-input:checked {
-            background-color: #c8102e; /* Vermelho */
-            border-color: #c8102e;
-        }
-        .form-check-input:focus {
-            box-shadow: 0 0 0 0.2rem rgba(200, 16, 46, 0.25); /* Efeito de foco no vermelho */
-        }
-        .form-check-label {
-            color: #003366; /* Azul escuro */
-        }
-        .mb-3, .mt-4 {
-            margin-bottom: 1.5rem;
-        }
-        .row {
-            margin-top: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
     <div class="container">
