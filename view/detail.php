@@ -76,7 +76,7 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
             <div class="card-body">
                 <h3>Forma de Recebimento</h3>
                 <p><?php echo $formaRecebimento; ?></p>
-                <h4 class="mt-4">Subformas de Recebimento</h4>
+                <h4 class="mt-4" style = "color: #003366;">Subformas de Recebimento</h4>
                 <ul>
                     <?php foreach($subFormasRecebimento as $sub) {
                         echo "<li>" . $sub . "</li>";
@@ -89,7 +89,7 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
         <div class="card">
             <div class="card-body">
                 <h3>Particularidades</h3>
-                <p><?php foreach($empresa as $e){ echo $e->particularidades;}?></p>
+                <p><?php foreach($empresa as $e){ echo nl2br(htmlspecialchars($e->particularidades, ENT_QUOTES, 'UTF-8'));}?></p>
             </div>
         </div>
         
@@ -97,7 +97,7 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
         <div class="card">
             <div class="card-body">
                 <h3>Observações</h3>
-                <p><?php foreach($empresa as $e){ echo $e->observacoes;}?></p>
+                <p><?php foreach($empresa as $e){ echo nl2br(htmlspecialchars($e->observacoes, ENT_QUOTES, 'UTF-8'));}?></p>
             </div>
         </div>
     </div>

@@ -32,7 +32,8 @@ include_once('navbar.php');
             </div>
             <div class="mb-3">
                 <label for="particularidades" class="form-label">Particularidades</label>
-                <input type="text" id="particularidades" name="particularidades" class="form-control" placeholder="Particularidades">
+                <textarea name="particularidades" class="form-control" id="particularidades"></textarea>
+<!--                 <input type="text" id="particularidades" name="particularidades" class="form-control" placeholder="Particularidades"> -->
             </div>
             <h3>Formas de Importação</h3>
             <label class="form-label">Selecione as Formas de Importação:</label>
@@ -130,7 +131,8 @@ include_once('navbar.php');
             </div>
             <div class="mb-3">
                 <label for="OBS" class="form-label">Observações</label>
-                <input type="text" id="OBS" name="OBS" class="form-control" placeholder="Observações">
+                <textarea id="OBS" name="OBS" class="form-control" ></textarea>
+                <!-- <input type="text" id="OBS" name="OBS" class="form-control" placeholder="Observações"> -->
             </div>
             <div class="mb-3">
                 <label for="imagens" class="form-label">Imagens</label>
