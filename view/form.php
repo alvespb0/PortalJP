@@ -54,7 +54,7 @@ include_once('navbar.php');
 <body>
     <div class="container">
         <h1>Formulário de Cadastro de Empresa</h1>
-        <form action="../action/salvarEmpresa.php" method="post" id="formCadastro">
+        <form action="../action/salvarEmpresa.php" method="post" id="formCadastro" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome da Empresa</label>
                 <input type="text" id="nome" name="nome_empresa" class="form-control" placeholder="Nome da Empresa" required>
@@ -169,12 +169,14 @@ include_once('navbar.php');
                 <input class="form-check-input" type="checkbox" name="subformas_recebimento[]" value="5" id="subforma5">
                 <label class="form-check-label" for="subforma5">Malote</label>
             </div>
-
             <div class="mb-3">
                 <label for="OBS" class="form-label">Observações</label>
                 <input type="text" id="OBS" name="OBS" class="form-control" placeholder="Observações">
             </div>
-
+            <div class="mb-3">
+                <label for="imagens" class="form-label">Imagens</label>
+                <input type="file" id="imagem" name="imagem" class="form-control" accept =".pdf, .jpg, .xml, .doc, .rar, .png">
+            </div>
             <button type="submit" name = "cadastrar" class="btn btn-primary">Criar Empresa</button>
         </form>
     </div>

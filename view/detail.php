@@ -23,6 +23,8 @@ foreach($resultado as $r){
     $ID_SubForma = $r->ID_SubFormaRecebimento;
 }
 $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_SubForma); #string
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -82,7 +84,8 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
                 <h3><?php foreach($empresa as $e){ echo $e->nome_Empresa;?></h3>
                 <p><strong>CNPJ:</strong> <?php echo  $e->CNPJ_Empresa; ?></p>
                 <p><strong>Endereço:</strong> <?php echo  $e->endereco_Empresa; }?></p>
-            </div>
+                <a href="../action/baixarArquivo.php?id=<?php echo $ID_Empresa; ?>" class="btn btn-primary">Baixar Arquivo</a>
+                </div>
         </div>
 
         <!-- Formas de Importação -->

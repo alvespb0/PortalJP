@@ -28,6 +28,16 @@ if(isset($_POST['cadastrar'])){
     $empresa->particularidades = $_POST['particularidades'];
     $empresa->observacoes = $_POST['OBS'];
 
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+        $arquivoTmp = $_FILES['imagem']['tmp_name'];
+        $arquivoNome = $_FILES['imagem']['name'];
+        $arquivoTipo = $_FILES['imagem']['type'];
+        $arquivoConteudo = file_get_contents($arquivoTmp); 
+        $empresa->imagem = $arquivoConteudo;
+    } else {
+        $empresa->imagem = null;
+    }
+
     $controllerEmpresa->salvarEmpresa($empresa);
     $infEmpresas = $controllerEmpresa->listaEmpresa($empresa->CNPJ_Empresa);
 

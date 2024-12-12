@@ -43,10 +43,11 @@ class DAOempresa{
      * @param string $endereco;
      * @param string $links;
      * @param string $particularidades;
-     * @param string $observacoes
+     * @param string $observacoes;
+     * @param string $imagem;
      * @return TRUE|EXCEPTION
      */
-    public function incluirEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $observacoes){
+    public function incluirEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $imagem){
         try{
             $conexaoDB = $this->conectarBanco();
         }catch(\Exception $e){
@@ -54,8 +55,8 @@ class DAOempresa{
         }
 
         $sqlInsert = $conexaoDB->prepare("INSERT INTO empresa(nome_Empresa, CNPJ_Empresa,
-                                        endereco_Empresa, links_Empresa, particularidades, observacoes) values (?,?,?,?,?,?)");
-        $sqlInsert->bind_param("ssssss", $nome, $cnpj, $endereco, $links, $particularidades, $observacoes);
+                                        endereco_Empresa, links_Empresa, particularidades, observacoes, imagem) values (?,?,?,?,?,?,?)");
+        $sqlInsert->bind_param("sssssss", $nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $imagem);
         $sqlInsert->execute();
 
         if(!$sqlInsert->error){
@@ -267,7 +268,7 @@ class DAOempresa{
             if($resultado->num_rows > 0){
                 while ($linha = $resultado->fetch_assoc()){
                     $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
-                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']);
+                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes'], $linha['imagem']);
                     $empresas[] = $empresa;
                 }
             }else{
@@ -280,6 +281,37 @@ class DAOempresa{
             return $empresas;
         }catch (Exception $e){
             throw new \Exception("Nenhuma empresa Cadastrada ".$e->getMessage());
+        }
+    }
+    
+    /**
+     * Recebe o ID da empresa e retorna o blob
+     * @param int $id
+     * @return string|Exception
+     */
+    public function buscaImagemById($id){
+        try{
+            $conexaoDB = $this->conectarBanco();
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+        try{
+            intval($id);
+            $sqlBuscaImg = $conexaoDB->prepare("SELECT imagem FROM empresa WHERE ID_Empresa = ?");
+            $sqlBuscaImg->bind_param("i", $id);
+            $sqlBuscaImg->execute();
+
+            $resultado = $sqlBuscaImg->get_result();
+            if($resultado->num_rows > 0){
+                $conexaoDB->close();
+                $sqlBuscaImg->close();
+                return $resultado->fetch_assoc(); 
+            }else{
+                throw new Exception("Imagem não encontrada para o ID da empresa: " . $id);
+            }
+        }catch (\Exception $e){
+            // Caso ocorra erro em qualquer parte do processo, lança uma exceção
+            throw new Exception("Erro ao buscar imagem: " . $e->getMessage());
         }
     }
 }

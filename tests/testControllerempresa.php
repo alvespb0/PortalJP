@@ -36,10 +36,12 @@ $empresaController = new ControllerEmpresa();
 /* $empresas = $empresaController->listaEmpresa('126246159'); */ /* funcionando */
 
 /* Teste de busca para todas as empresas */
-$empresas = $empresaController->listaTodasEmpresas(); /* funcionando */
+/* $empresas = $empresaController->listaTodasEmpresas(); */ /* funcionando */
+/*  */
+/* foreach($empresas as $e){ */
+/*     echo $e->CNPJ_Empresa; */
+/*}*/
 
-foreach($empresas as $e){
-    echo $e->CNPJ_Empresa;
-}
+$empresaController->baixarImagem(50);
 
 ?>
