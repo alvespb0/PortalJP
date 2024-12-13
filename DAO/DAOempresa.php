@@ -42,12 +42,11 @@ class DAOempresa{
      * @param string $cnpj;
      * @param string $endereco;
      * @param string $links;
-     * @param string $particularidades;
      * @param string $observacoes;
      * @param string $imagem;
      * @return TRUE|EXCEPTION
      */
-    public function incluirEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $imagem){
+    public function incluirEmpresa($nome, $cnpj, $endereco, $links, $observacoes, $imagem){
         try{
             $conexaoDB = $this->conectarBanco();
         }catch(\Exception $e){
@@ -55,8 +54,8 @@ class DAOempresa{
         }
 
         $sqlInsert = $conexaoDB->prepare("INSERT INTO empresa(nome_Empresa, CNPJ_Empresa,
-                                        endereco_Empresa, links_Empresa, particularidades, observacoes, imagem) values (?,?,?,?,?,?,?)");
-        $sqlInsert->bind_param("sssssss", $nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $imagem);
+                                        endereco_Empresa, links_Empresa, observacoes, imagem) values (?,?,?,?,?,?)");
+        $sqlInsert->bind_param("ssssss", $nome, $cnpj, $endereco, $links, $observacoes, $imagem);
         $sqlInsert->execute();
 
         if(!$sqlInsert->error){
@@ -76,12 +75,11 @@ class DAOempresa{
      * @param string $cnpj;
      * @param string $endereco;
      * @param string $links;
-     * @param string $particularidades;
      * @param string $observacoes
      * @param int $id
      * @return TRUE|EXCEPTION
      */
-    public function atualizarEmpresa($nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $id){
+    public function atualizarEmpresa($nome, $cnpj, $endereco, $links, $observacoes, $id){
         try{
             $conexaoDB = $this->conectarBanco();
         }catch(\Exception $e){
@@ -93,10 +91,9 @@ class DAOempresa{
                                         CNPJ_Empresa = ?,
                                         endereco_Empresa = ?,
                                         links_Empresa = ?,
-                                        particularidades = ?,
                                         observacoes = ?
                                         where ID_Empresa = ?");
-        $sqlUpdate->bind_param("ssssssi", $nome, $cnpj, $endereco, $links, $particularidades, $observacoes, $id);
+        $sqlUpdate->bind_param("sssssi", $nome, $cnpj, $endereco, $links, $observacoes, $id);
         $sqlUpdate->execute();
         
         if(!$sqlUpdate->error){
@@ -162,7 +159,7 @@ class DAOempresa{
         if($resultado->num_rows !== 0){
             while($linha = $resultado->fetch_assoc()){
                 $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
-                                        $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']);
+                                        $linha['links_Empresa'], $linha['nome_Empresa'], $linha['observacoes']);
                 $empresas[] = $empresa;
             }
         }else{
@@ -198,7 +195,7 @@ class DAOempresa{
         if($resultado->num_rows > 0){
             while ($linha = $resultado->fetch_assoc()){
                 $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
-                $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']);
+                $linha['links_Empresa'], $linha['nome_Empresa'], $linha['observacoes']);
                 $empresas[] = $empresa;
             }
         }else{
@@ -233,7 +230,7 @@ class DAOempresa{
             while ($linha = $resultado->fetch_assoc()) {
                 $empresa = new Empresa(
                     $linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
-                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes']
+                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['observacoes']
                 );
                 $empresas[] = $empresa;
             }
@@ -268,7 +265,7 @@ class DAOempresa{
             if($resultado->num_rows > 0){
                 while ($linha = $resultado->fetch_assoc()){
                     $empresa = new Empresa($linha['ID_Empresa'], $linha['CNPJ_Empresa'], $linha['endereco_Empresa'],
-                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['particularidades'], $linha['observacoes'], $linha['imagem']);
+                    $linha['links_Empresa'], $linha['nome_Empresa'], $linha['observacoes'], $linha['imagem']);
                     $empresas[] = $empresa;
                 }
             }else{

@@ -4,7 +4,7 @@ use DAO\DAOempresa;
 
 $testDAO = new DAOempresa();
 /**teste de inclusão de empresa inicialmente */
-/* $testDAO->incluirEmpresa("Teste2", "1234568", "das maças", ".br", "empresa do Arthur", "essa é uma observação qualquer, só para verificar se a inclusão está funcionando"); */ /* Inclusão funcionando */
+$testDAO->incluirEmpresa("Teste2", "1234568", "das maças", ".br", "essa é uma observação qualquer, só para verificar se a inclusão está funcionando", null);  /* Inclusão funcionando */
 
 /**teste de edição da empresa */
 /* $testDAO->atualizarEmpresa("tteste2","1234567","da maçã", ".net", "empresa vendida", "diminuindo os bag", 7); */ /* Edit funcionando, porém não sei como conseguir o ID*/
@@ -20,6 +20,6 @@ $testDAO = new DAOempresa();
 #$testDAO->excluirEmpresa(123456); /** Exclusão funcionando adequadamente */
 
 /* teste de consulta blob */
-$imagem = $testDAO->buscaImagemById(50);
-var_dump($imagem);
+/* $imagem = $testDAO->buscaImagemById(50);
+var_dump($imagem); */
 ?>

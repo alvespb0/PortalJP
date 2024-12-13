@@ -30,11 +30,14 @@ include_once('navbar.php');
                 <label for="links" class="form-label">Links da Empresa</label>
                 <input type="text" id="links" name="links_empresa" class="form-control" placeholder="Links">
             </div>
+
+        <div id="fields-container">
             <div class="mb-3">
                 <label for="particularidades" class="form-label">Particularidades</label>
-                <textarea name="particularidades" class="form-control" id="particularidades"></textarea>
-<!--                 <input type="text" id="particularidades" name="particularidades" class="form-control" placeholder="Particularidades"> -->
+                <textarea name="particularidades[]" class="form-control" id="particularidades"></textarea>
             </div>
+        </div>
+            <button type="button" class="btn btn-primary" onclick="addField()">+ Adicionar</button>
             <h3>Formas de Importação</h3>
             <label class="form-label">Selecione as Formas de Importação:</label>
             <div class="row mb-3">
@@ -190,5 +193,22 @@ include_once('navbar.php');
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function addField() {
+            const container = document.getElementById('fields-container');
+
+            const div = document.createElement('div');
+            div.classList.add('mb-3');
+
+            div.innerHTML = `
+                <label for="particularidades" class="form-label">Particularidades</label>
+                <textarea name="particularidades[]" class="form-control" id="particularidades"></textarea>
+            `;
+
+            // Adiciona o novo campo ao contêiner
+            container.appendChild(div);
+        }
+    </script>
 </body>
 </html>
