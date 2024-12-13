@@ -71,8 +71,7 @@ foreach($empresaImportacao as $ei){
             </div>
             <div class="mb-3">
                 <label for="particularidades" class="form-label">Particularidades</label>
-                <input type="text" id="particularidades" name="particularidades" class="form-control" placeholder="Particularidades" value ="<?php foreach($empresa as $e){ echo $e->particularidades;}?>" required>
-            </div>
+                <textarea name="particularidades" class="form-control" id="particularidades"><?php echo nl2br(htmlspecialchars($e->particularidades, ENT_QUOTES, 'UTF-8')); ?></textarea>            </div>
             <h3>Formas de Importação</h3>
             <label class="form-label">Selecione as Formas de Importação:</label>
             <div class="row mb-3">
@@ -170,7 +169,7 @@ foreach($empresaImportacao as $ei){
 
             <div class="mb-3">
                 <label for="OBS" class="form-label">Observações</label>
-                <input type="text" id="OBS" name="OBS" class="form-control" placeholder="Observações" value = "<?php foreach($empresa as $e){ echo $e->observacoes;} ?>">
+                <textarea id="OBS" name="OBS" class="form-control" ><?php echo nl2br(htmlspecialchars($e->observacoes, ENT_QUOTES, 'UTF-8')); ?></textarea>
             </div>
 
             <button type="submit" name = "editar" class="btn btn-primary">Editar Empresa</button>
