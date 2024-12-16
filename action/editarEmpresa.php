@@ -6,20 +6,25 @@ namespace action;
 require_once('../controllers/controllerEmpresa.php');
 require_once('../controllers/controllerEmpresaImportacao.php');
 require_once('../controllers/controllerEmpresaRecebimento.php');
+require_once('../controllers/controllerParticularidades.php');
 require_once('../models/empresa.php');
 require_once('../models/empresaImportacao.php');
 require_once('../models/empresaRecebimento.php');
+require_once('../models/particularidades.php');
 
 use controllers\ControllerEmpresa;
 use controllers\ControllerEmpresaImportacao;
 use controllers\ControllerEmpresaRecebimento;
+use controllers\ControllerParticularidades;
 use models\Empresa;
 use models\empresaImportacao;
 use models\EmpresaRecebimento;
+use models\Particularidades;
 
 $controllerEmpresa = new ControllerEmpresa;
 $controllerEmpresaRecebmento = new ControllerEmpresaRecebimento;
 $controllerEmpresaImportacao = new ControllerEmpresaImportacao;
+$controllerParticularidade = new ControllerParticularidades;
 
 if(isset($_POST['editar'])){
     /* Informações da Empresa */
@@ -33,6 +38,17 @@ if(isset($_POST['editar'])){
     $empresa->ID_Empresa = intval($_POST['ID_Empresa']);
 
     $controllerEmpresa->editarEmpresa($empresa);
+
+    /* Parte das particularidades */
+    $controllerParticularidade->deleteParticularidades($empresa->ID_Empresa);
+
+    $part = $_POST['particularidades'];
+    foreach($part as $p){
+        $particularidade = new Particularidades();
+        $particularidade->ID_Empresa = $empresa->ID_Empresa;
+        $particularidade->particularidades = $p;
+        $controllerParticularidade->salvarParticularidades($particularidade);
+    }
 
     /* Informações das Importações */
     $importacoes = array();

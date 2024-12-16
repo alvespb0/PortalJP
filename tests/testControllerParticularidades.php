@@ -21,5 +21,5 @@ $controllerParticularidade = new ControllerParticularidades;
 /* var_dump($resultado); */
 
 /* teste de exclusão */
-$controllerParticularidade->deleteParticularidades(61);
+/* $controllerParticularidade->deleteParticularidades(61); */
 ?>

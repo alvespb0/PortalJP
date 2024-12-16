@@ -4,20 +4,27 @@ namespace action;
 require_once('../controllers/controllerEmpresa.php');
 require_once('../controllers/controllerEmpresaImportacao.php');
 require_once('../controllers/controllerEmpresaRecebimento.php');
+require_once('../controllers/controllerParticularidades.php');
 require_once('../models/empresa.php');
 require_once('../models/empresaImportacao.php');
 require_once('../models/empresaRecebimento.php');
+require_once('../models/particularidades.php');
 
 use controllers\ControllerEmpresa;
 use controllers\ControllerEmpresaImportacao;
 use controllers\ControllerEmpresaRecebimento;
+use controllers\ControllerParticularidades;
 use models\Empresa;
 use models\empresaImportacao;
 use models\EmpresaRecebimento;
+use models\Particularidades;
 
 $controllerEmpresa = new ControllerEmpresa;
 $controllerEmpresaRecebmento = new ControllerEmpresaRecebimento;
 $controllerEmpresaImportacao = new ControllerEmpresaImportacao;
+$controllerParticularidade = new ControllerParticularidades;
+
+var_dump($_POST['particularidades']);
 
 if(isset($_POST['cadastrar'])){
     $empresa = new Empresa();
@@ -25,7 +32,6 @@ if(isset($_POST['cadastrar'])){
     $empresa->CNPJ_Empresa = $_POST['cnpj_empresa'];
     $empresa->endereco_Empresa = $_POST['endereco_empresa'];
     $empresa->links_Empresa = $_POST['links_empresa'];
-    $empresa->particularidades = $_POST['particularidades'];
     $empresa->observacoes = $_POST['OBS'];
 
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
@@ -44,6 +50,16 @@ if(isset($_POST['cadastrar'])){
     foreach($infEmpresas as $inf){
         $empresa->ID_Empresa = $inf->ID_Empresa;
     }
+
+    /* parte das particularidades */
+    $part = $_POST['particularidades'];
+    foreach($part as $p){
+        $particularidade = new Particularidades();
+        $particularidade->ID_Empresa = $empresa->ID_Empresa;
+        $particularidade->particularidades = $p;
+        $controllerParticularidade->salvarParticularidades($particularidade);
+    }
+    /* fim da parte das particularidades */
 
     $importacoes = array();
     $importacoes = $_POST['importacao'];

@@ -3,20 +3,24 @@ include_once('navbar.php');
 require_once('../controllers/controllerEmpresa.php');
 require_once('../controllers/controllerEmpresaImportacao.php');
 require_once('../controllers/controllerEmpresaRecebimento.php');
+require_once('../controllers/controllerParticularidades.php');
 
 use controllers\ControllerEmpresa;
 use controllers\ControllerEmpresaImportacao;
 use controllers\ControllerEmpresaRecebimento;
+use controllers\ControllerParticularidades;
 
 $controllerEmpresa = new ControllerEmpresa;
 $controllerEmpresaRecebmento = new ControllerEmpresaRecebimento;
 $controllerEmpresaImportacao = new ControllerEmpresaImportacao;
+$controllerParticularidades = new ControllerParticularidades;
 
 $ID_Empresa = $_GET['id'];
 
 $empresa = $controllerEmpresa->listaEmpresaById($ID_Empresa); #array 
 $formasImportacao = $controllerEmpresaImportacao->listaImportacoes($ID_Empresa); #array
 $subFormasRecebimento = $controllerEmpresaRecebmento->listaSubformasRecebimento($ID_Empresa); #array
+$particularidades = $controllerParticularidades->listaParticularidades($ID_Empresa);
 
 $resultado = $controllerEmpresaRecebmento->listaEmpresaRecebimento($ID_Empresa);
 foreach($resultado as $r){
@@ -86,12 +90,18 @@ $formaRecebimento = $controllerEmpresaRecebmento->listaFormasRecebimento($ID_Sub
         </div>
 
         <!-- Particularidades -->
-        <div class="card">
-            <div class="card-body">
-                <h3>Particularidades</h3>
-                <p><?php foreach($empresa as $e){ echo nl2br(htmlspecialchars($e->particularidades, ENT_QUOTES, 'UTF-8'));}?></p>
-            </div>
-        </div>
+        <?php
+            foreach($particularidades as $p){
+                echo "<div class='card'>";
+                echo "<div class='card-body'>";
+                echo "<h3>Particularidades</h3>";
+                echo "<p>";
+                echo nl2br(htmlspecialchars($p, ENT_QUOTES, 'UTF-8'));
+                echo "</p>";
+                echo "</div>";
+                echo "</div>";
+            } 
+        ?>
         
         <!-- Observações -->
         <div class="card">
